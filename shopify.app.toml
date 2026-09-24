@@ -1,0 +1,35 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "c2b46466af2e96e4f6b5896fe705432d"
+application_url = "https://hcp-middleware-staging.dose-daily.workers.dev"
+embedded = true
+name = "hcp-staging-proxy"
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "dose-for-clinicians-dev.myshopify.com"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_customers,read_draft_orders,read_orders,read_products,unauthenticated_write_customers,write_app_proxy,write_customers,write_draft_orders,write_orders,write_products"
+optional_scopes = [ ]
+use_legacy_install_flow = false
+
+[webhooks]
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+[auth]
+redirect_urls = [ "https://hcp-middleware-staging.dose-daily.workers.dev/api/auth" ]
+
+[app_proxy]
+url = "https://hcp-middleware-staging.dose-daily.workers.dev/hcp"
+prefix = "apps"
+subpath = "hcp"
